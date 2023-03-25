@@ -54,7 +54,6 @@ def print_tree(node: Node, level: int=0):
         print_tree(child, level + 1)
 
 
-
 if __name__ == '__main__':
     root_dir = os.path.dirname(__file__)
     # print(*read_dir(root_dir))
@@ -63,21 +62,19 @@ if __name__ == '__main__':
 
 
 # first = r'D:\directory-tree\.git\refs\tags', True
-# second = r'D:\directory-tree\.gitignore', False
-# dir_path = os.path.dirname(second[0]) + os.sep
-# back_dirs = first[0].replace(dir_path, '')
-# back_times = len(back_dirs.split(os.sep))
+# # second = r'D:\directory-tree\.gitignore', False
+# # dir_path = os.path.dirname(second[0]) + os.sep
+# # back_dirs = first[0].replace(dir_path, '')
+# # back_times = len(back_dirs.split(os.sep))
+# #
+# # new_first = first[0].split(os.sep)
+# # new_second = second[0].split(os.sep)
 #
-# new_first = first[0].split(os.sep)
-# new_second = second[0].split(os.sep)
-
-# print(new_first)
-# print(new_second)
+# # print(new_first)
+# # print(new_second)
+# #
+# # print(len(new_first) - len(new_second) + first[1])
 #
-# print(len(new_first) - len(new_second) + first[1])
-
-# print(back_dirs)
-# print(dir_path)
-# print(back_times)
-
-
+# # print(back_dirs)
+# # print(dir_path)
+# # print(back_times)
