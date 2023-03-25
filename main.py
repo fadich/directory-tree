@@ -25,36 +25,59 @@ class Node:
         node.parent = self
 
 
-if __name__ == '__main__':
-    root_dir = os.path.dirname(__file__)
-    # print(*read_dir(root_dir))
-    parent_root = Node(root_dir, True)
+def build_tree(path: str) -> Node:
+    parent_root = Node(path, True)
     current_root = parent_root
 
-    for path, is_dir in read_dir(root_dir):
+    for path, is_dir in read_dir(path):
         node = Node(path, is_dir)
-        current_root.add_node(node)
-        root_split = current_root.path.split(os.sep)
-        node_split = node.path.split(os.sep)
-        len_split = len(root_split) - len(node_split)
-        while len_split:
-            len_split -= 1
+        dir_path = os.path.dirname(node.path)
+        back_dirs = current_root.path.replace(dir_path, '')
+        back_times = len(back_dirs.split(os.sep)) - 1
+        while back_times > 0 and current_root.parent:
+            back_times -= 1
             current_root = current_root.parent
+
+        current_root.add_node(node)
 
         if is_dir:
             current_root = node
-        print(path, is_dir)
+
+    return parent_root
 
 
-first = r'D:\directory-tree\.git\refs\tags', True
-second = r'D:\directory-tree\.gitignore', False
+def print_tree(node: Node, level: int=0):
+    file_name = os.path.basename(node.path)
+    spaces = '  ' * level
+    print(f'{spaces}{file_name}')
+    for child in node.children:
+        print_tree(child, level + 1)
 
-new_first = first[0].split(os.sep)
-new_second = second[0].split(os.sep)
 
-print(new_first)
-print(new_second)
 
-print(len(new_first) - len(new_second) + first[1])
+if __name__ == '__main__':
+    root_dir = os.path.dirname(__file__)
+    # print(*read_dir(root_dir))
+    tree = build_tree(root_dir)
+    print_tree(tree)
+
+
+# first = r'D:\directory-tree\.git\refs\tags', True
+# second = r'D:\directory-tree\.gitignore', False
+# dir_path = os.path.dirname(second[0]) + os.sep
+# back_dirs = first[0].replace(dir_path, '')
+# back_times = len(back_dirs.split(os.sep))
+#
+# new_first = first[0].split(os.sep)
+# new_second = second[0].split(os.sep)
+
+# print(new_first)
+# print(new_second)
+#
+# print(len(new_first) - len(new_second) + first[1])
+
+# print(back_dirs)
+# print(dir_path)
+# print(back_times)
 
 
